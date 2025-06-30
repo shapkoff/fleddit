@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Register
+{% endblock title %}
+
+{% block content %}
+    <h1>Register</h1>
+
+    {% if messages %}
+        {% for message in messages %}    
+            <div class="alert alert-danger" role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="usernameRegister" class="form-label">username</label>
+            <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="passwordRegister" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="passwordRegisterReapet" class="form-label">Repeat password</label>
+            <input type="password" class="form-control" name="password_repeat">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock content %}

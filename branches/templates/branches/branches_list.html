@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Branches
+{% endblock %}
+
+{% block content %}
+    <div class="branches">
+        {% for branch in branches %}
+            <a href="{% url 'branch' branch.name %}" class="branch-link">
+                <div class="branch">
+                    <div class="branch-header">
+                        <img src="{{ branch.logo.url }}" alt="{{ branch.title }}">
+                        <div class="branch-info">
+                            <h2>fl/{{ branch.name }}</h2>
+                            <h3>{{ branch.title }}</h3>
+                        </div>
+                    </div>
+                    <p>{{ branch.description }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p>No branches available.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
