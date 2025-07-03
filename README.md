@@ -11,7 +11,7 @@ A Reddit-inspired platform to post some cool stuff, share ideas, and discuss any
 
 Built with:
 - Python / Django
-- SQLite
+- MySQL
 - Bootstrap 5
 
 ## 🚀 How to run
@@ -36,7 +36,12 @@ python -m venv .venv
 pip install django
 ```
 
-5) Run server
+5) Apply migrations
+```bash
+python .\manage.py migrate
+```
+
+6) Run server
 ```bash
 python .\manage.py runserver
 ```
