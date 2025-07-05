@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         "OPTIONS": {
-            "read_default_file": 'D:\\projects\\fleddit\\db.cnf',
+            "read_default_file": 'D:\\projects\\fleddit\\mysql_db.cnf',
         }
     }
 }
