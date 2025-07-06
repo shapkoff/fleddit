@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .forms import CreateUserForm
 
 # Create your views here.
 def login_user(request):
@@ -18,24 +19,16 @@ def login_user(request):
         return render(request, 'users/login.html')
     
 def register_user(request):
-    user = get_user_model()
     if request.method == 'POST':
-        username = request.POST["username"]
-        password = request.POST["password"]
-        password_repeat = request.POST["password_repeat"]
-
-        if user.objects.filter(username=username).exists():
-            messages.error(request, ("Username is already taken"))
-        elif password != password_repeat:
-            messages.error(request, ("Passwords don't match"))
-        else:
-            user.objects.create_user(username=username, password=password)
-            messages.success(request, 'Successfully created')
-            return redirect('login')
-            
-        return redirect('register')
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+            return redirect('home')
     else:
-        return render(request, 'users/register.html')
+        form = CreateUserForm()
+    return render(request, 'users/register.html', {'form': form})
 
 def logout_user(request):
     logout(request)

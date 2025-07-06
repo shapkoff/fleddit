@@ -20,7 +20,6 @@ h4 {
   margin-top: 30px;
 }
 
-/* Левая панель (sidebar) */
 .col-2 {
   background-color: #030303;
   height: 100vh;
@@ -49,7 +48,6 @@ nav ul li:hover {
   background-color: #2c2c2e;
 }
 
-/* Контент (правая часть) */
 .col-8 {
   padding: 30px 50px;
   overflow-y: auto;
@@ -67,7 +65,6 @@ main {
   gap: 20px;
 }
 
-/* Карточка поста без тени и анимаций */
 .post {
   background-color: #272729;
   padding: 20px;
@@ -98,7 +95,6 @@ main {
   color: #aaa;
 }
 
-/* Изображения в посте */
 .post-image {
   margin-top: 15px;
 }
@@ -110,7 +106,6 @@ main {
   object-fit: cover;
 }
 
-/* Убрать подчёркивания у ссылок и сохранить цвет */
 .posts a {
   text-decoration: none;
   color: inherit;
@@ -181,23 +176,28 @@ main {
 .post-image img,
 .carousel-inner img,
 .carousel-wrapper img {
-  max-width: 100%;      /* Чтобы не выходили за пределы контейнера */
-  max-height: 300px;    /* Максимальная высота, например 300px */
-  object-fit: contain;  /* Сохраняет пропорции, помещая изображение целиком */
-  border-radius: 8px;   /* Закругление углов для красоты */
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
   margin-top: 10px;
   display: block;
   margin-left: auto;
-  margin-right: auto;   /* Центрирование картинки */
+  margin-right: auto;
 }
 
-.btn{
+.btn {
   background-color: #ff4500;
   border-color: #ff4500;
 }
 
 .btn:hover,
-.btn:hover:active{
+.btn:active,
+.btn:focus:active {
   background-color: #ff7d4e;
   border-color: #ff7d4e;
+}
+
+.form-text {
+  color: #d7dadc;
 }

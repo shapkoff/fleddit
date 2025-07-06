@@ -6,14 +6,6 @@
 
 {% block content %}
   
-  {% if messages %}
-    {% for message in messages %}    
-      <div class="alert alert-success" role="alert">
-        {{ message }}
-      </div>
-      {% endfor %}
-    {% endif %}
-  
     <h1>Latest Posts</h1>
   {% include "post.html" %}
 {% endblock %}
