@@ -31,9 +31,9 @@ python -m venv .venv
 .\.venv\Scripts\activate
 ```
 
-4) Install Django
+4) Install requirements
 ```bash
-pip install django
+pip install -r requirements.txt
 ```
 
 5) Apply migrations
