@@ -201,3 +201,52 @@ main {
 .form-text {
   color: #d7dadc;
 }
+
+.user-profile-box {
+  background-color: #272729;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #3a3a3c;
+  transition: background-color 0.2s;
+  margin-bottom: 15px;
+}
+
+.user-profile-box:hover {
+  background-color: #2f2f31;
+}
+
+.user-profile-box .username {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4500;
+  text-decoration: none;
+}
+
+.user-profile-box .username:hover {
+  text-decoration: underline;
+}
+
+.follow-box {
+  background-color: #272729;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #3a3a3c;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.follow-box:hover {
+  background-color: #2f2f31;
+}
+
+.follow-box p {
+  margin: 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.card {
+  background-color: #272729;
+  border: 1px solid #3a3a3c;
+}

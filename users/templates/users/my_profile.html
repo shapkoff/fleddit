@@ -1,13 +1,51 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     My Profile
 {% endblock title %}
 
 {% block content %}
-    <h1>Hello, {{ username }}</h1>
+    <h2>Change user info</h2>
+    
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Update info
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>    
+        </div>
+    </div>
 
-    {% comment %} diactivate acc {% endcomment %}
+    <h2>Change password</h2>
+    <a href="{% url 'password' %}" class="btn btn-primary">Change</a>
+
+    <h2>Delete account</h2>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Delete
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete account</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='{% url "disable" %}'">Yes</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
     <h2>Your posts</h2>
     {% include "post.html" %}

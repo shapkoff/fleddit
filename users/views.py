@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-from .forms import CreateUserForm
+from .forms import CreateUserForm, ChangeUserInfoForm
 from posts.models import Post
 
 # Create your views here.
@@ -14,7 +15,7 @@ def login_user(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, ('There Was An Error Logging In'))
+            messages.warning(request, ('There Was An Error Logging In'))
             return redirect('login')
     else:
         return render(request, 'users/login.html')
@@ -37,6 +38,47 @@ def logout_user(request):
     return redirect('home')
 
 def my_profile(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+        
+    posts = Post.objects.filter(user=request.user)
+
+    if request.method == 'POST':
+        form = ChangeUserInfoForm(request.POST, initial={'username': request.user.username, 'email': request.user.email})
+        if form.is_valid():
+            user = request.user
+            user.username = form.cleaned_data['username']
+            user.email = form.cleaned_data['email']
+            user.save()
+            messages.success(request, "User's info updated")
+            return redirect('profile')
+        else:
+            messages.warning(request, 'Not valid info')
+    else:
+        form = ChangeUserInfoForm(initial={'username': request.user.username, 'email': request.user.email})
+
+    return render(request, 'users/my_profile.html', {'posts': posts, 'username': request.user.username, 'form': form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Password has changed')
+            return redirect('home')
+        else:
+            messages.warning(request, form.errors)
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, 'users/change_password.html', {'form': form})
+
+def disable_user(request):
     if request.user.is_authenticated:
-        posts = Post.objects.filter(user=request.user)
-        return render(request, 'users/my_profile.html', {'posts': posts, 'username': request.user.username})
+        user = request.user
+        user.is_active = False
+        user.save()
+        messages.success(request, 'User is deleted')
+    return redirect('home')
