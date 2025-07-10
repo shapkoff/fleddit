@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_view, name='home'),
     path('fl/', include('branches.urls')),             # /fl/<branch_name>/<post_slug>
-    path('user/', include('users.urls'))
+    path('user/', include('users.urls')),
+    path('post/', include('posts.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

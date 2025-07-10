@@ -22,11 +22,12 @@
         <nav>
           <ul>
             <a href="{% url "home" %}"><li>Home</li></a>
-            <li>###########</li>
             <a href="{% url "branches_list" %}"><li>Branches</li></a>
           </ul>
         </nav>
         <h4>RECENT</h4>
+
+        <a class="btn btn-primary" href="{% url "new" %}" role="button">New Post</a>
       </div>
 
       <div class="col-8">
