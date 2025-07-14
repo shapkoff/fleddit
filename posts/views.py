@@ -8,22 +8,31 @@ from django.contrib import messages
 # Create your views here.
 def post_view(request, branch, slug):
     post = get_object_or_404(Post, slug=slug)
+    control = request.user.is_authenticated and request.user == post.user
 
     if request.method == 'POST':
-        comment_text = request.POST['comment_text']
-        if len(comment_text) > 0: 
-            user = request.user
+        if request.user.is_authenticated:
+            if request.user == post.user:
+                if request.POST.get('delete'):
+                    post.delete()
+                    return redirect('home')
+            else:
+                comment_text = request.POST['comment_text']
+                if len(comment_text) > 0: 
+                    user = request.user
 
-            comment = Comment.objects.create(text=comment_text, user=user, post=post)
+                    comment = Comment.objects.create(text=comment_text, user=user, post=post)
 
-            return JsonResponse({
-                'success': True,
-                'username': user.username,
-                'text': comment.text,
-            })
+                    return JsonResponse({
+                        'success': True,
+                        'username': user.username,
+                        'text': comment.text,
+                    })
+        else:
+            return redirect('login')
 
     comments = Comment.objects.filter(post=post)
-    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments})
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'control': control})
 
 def add_new_post(request):
     if request.method == 'POST':
