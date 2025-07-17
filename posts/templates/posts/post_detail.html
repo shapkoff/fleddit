@@ -17,7 +17,7 @@
     
 
     <p class="source">
-        Posted by <strong>{{ post.user.username }}</strong>
+        Posted by <a href="{% url "users" post.user.id %}"><strong>{{ post.user.username }}</strong></a>
     </p>
     <p class="meta">{{ post.date|date:"F j, Y, H:i" }}</p>
 

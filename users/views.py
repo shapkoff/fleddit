@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from .forms import CreateUserForm, ChangeUserInfoForm
@@ -82,3 +82,8 @@ def disable_user(request):
         user.save()
         messages.success(request, 'User is deleted')
     return redirect('home')
+
+def user_profile(request, id):
+    user = get_user_model().objects.get(id=id)
+    posts = Post.objects.filter(user=user)
+    return render(request, 'users/user_profile.html', {'user': user, 'posts': posts})
