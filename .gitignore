@@ -208,3 +208,6 @@ __marimo__/
 
 media/
 mysql_db.cnf
+
+staticfiles/
+public/

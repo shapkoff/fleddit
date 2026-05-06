@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'comments',
     'users',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'django_distill',
 ]
 
 MIDDLEWARE = [
